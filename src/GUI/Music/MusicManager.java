@@ -1,7 +1,7 @@
 package GUI.Music;
 
 public class MusicManager {
-    static MusicThread mt = new MusicThread("resources/music/music1.wav");
+    static MusicThread mt = new MusicThread("/music/music1.wav");
     static Thread thread = null;
 
     public static void play() {

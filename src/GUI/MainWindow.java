@@ -1,19 +1,16 @@
     package GUI;
 
     import javax.swing.*;
-    import java.awt.*;
-
 
     public class MainWindow {
         CustomWindow customWindow;
         JFrame mainWindw;
         SettingsWindow settingsWindow;
         public MainWindow(){
+
             customWindow = new CustomWindow();
-            settingsWindow = new SettingsWindow(mainWindw);
-
-
             mainWindw = new JFrame("Main Window");
+            settingsWindow = new SettingsWindow(mainWindw);
 
             mainWindw.setSize(customWindow.getMonitorWidth(), customWindow.getMonitorHeight());
             mainWindw.setUndecorated(true);
@@ -24,60 +21,35 @@
             mainWindw.getContentPane().setLayout(null);
             mainWindw.setLayout(null);
 
-
-            JPanel mainBackground = customWindow.paintBackground("resources/pictures/MainBackground/MainBackground.png");
+            JPanel mainBackground = customWindow.paintBackground("/pictures/MainBackground/MainBackground.png");
             mainBackground.setLayout(null);
             mainWindw.setContentPane(mainBackground);
 
-
-
-            int playButtonW = (int) (803 * 0.75);
-            int playButtonH = (int) (244 * 0.75);
-
-
-            JButton playButton = new JButton();
-            CustomButton.buttonImage(playButton, "/pictures/MainBackground/PlayButton.png", playButtonW, playButtonH);
+            int playButtonW = (int) (customWindow.getMonitorWidth() * 0.3135);
+            int playButtonH = (int) (customWindow.getMonitorHeight() * 0.162);
             int playButtonX = (int) (customWindow.getMonitorWidth() * 0.375);
             int playButtonY = (int) (customWindow.getMonitorHeight() * 0.178);
+            JButton playButton = new JButton();
+            CustomButton.buttonImage(playButton, "/pictures/MainBackground/PlayButton.png", playButtonW, playButtonH);
             playButton.setLocation(playButtonX, playButtonY);
             mainBackground.add(playButton);
             playButton.addActionListener(e -> {
-                System.out.println("zapnuto");
+                System.out.println("game started");
                 mainWindw.dispose();
-
             });
 
-
-
-
-            int EndButtonW = (int) (603 * 0.4);
-            int EndButtonH = (int) (243 * 0.4);
-
-//            JButton endButton = new JButton("End");
-//            CustomButton.buttonImage(endButton, "/pictures/EndButton.png", EndButtonW, EndButtonH);
-//            endButton.setLocation(1500, 800);
-//            mainWindw.add(endButton);
-//            endButton.setVisible(true);
-//            endButton.addActionListener(e ->{
-//                System.exit(0);
-//            });
-
-
-
+            int settingsButtonW = (int) (customWindow.getMonitorWidth() * 0.1042);
+            int settingsButtonH = (int) (customWindow.getMonitorHeight() * 0.1852);
+            int settingsButtonX = (int) (customWindow.getMonitorWidth() * 0.0156);
+            int settingsButtonY = (int) (customWindow.getMonitorHeight() * 0.0139);
             JButton settingsButton = new CustomButton();
-            CustomButton.buttonImage(settingsButton, "/pictures/SettingsButton.png",200,200);
-            settingsButton.setLocation(30, 15);
+            CustomButton.buttonImage(settingsButton, "/pictures/SettingsButton.png",settingsButtonW,settingsButtonH);
+            settingsButton.setLocation(settingsButtonX, settingsButtonY);
             settingsButton.addActionListener(e -> {
                 settingsWindow.setVisible(true);
             });
             mainBackground.add(settingsButton);
 
-
-
             mainWindw.setVisible(true);
-
-
-
         }
     }
-

@@ -3,8 +3,6 @@ package GUI;
 import javax.swing.*;
 import java.awt.*;
 
-
-
 public class CustomWindow {
     static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     static int width = (int) screenSize.getWidth();
@@ -17,21 +15,27 @@ public class CustomWindow {
         return height;
     }
 
-    /*public JLabel paintBackground(String backgroundFile){
-        ImageIcon newBackgroundImage = new ImageIcon(backgroundFile);
-        JLabel newBackground = new JLabel(newBackgroundImage);
-        newBackground.setBounds(0, 0, getMonitorWidth(), getMonitorHeight());
-        return newBackground;
-    }*/
-
     public JPanel paintBackground(String backgroundFile){
-        Image img = new ImageIcon(backgroundFile).getImage();
+        Image img = null;
+        try {
+            java.net.URL url = CustomWindow.class.getResource(backgroundFile);
+            if (url != null) {
+                img = javax.imageio.ImageIO.read(url);
+            } else {
+                System.err.println("Error with load: " + backgroundFile);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        final Image finalImg = img;
         JPanel newBackground = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
+                if (finalImg != null) {
+                    g.drawImage(finalImg, 0, 0, getWidth(), getHeight(), this);
+                }
             }
         };
 
@@ -39,7 +43,5 @@ public class CustomWindow {
         newBackground.setBounds(0, 0, width, height);
         return newBackground;
     }
-
-
 
 }
