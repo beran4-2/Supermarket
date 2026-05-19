@@ -1,6 +1,5 @@
-import GUI.MainWindow;
+import GUI.Windows.MainWindow;
 import GUI.Music.MusicManager;
-import GUI.Music.MusicThread;
 
 public class Main {
     public static void main(String[] args) {

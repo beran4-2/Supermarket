@@ -1,4 +1,7 @@
-    package GUI;
+    package GUI.Windows;
+
+    import GUI.Customs.CustomButton;
+    import GUI.Customs.CustomWindow;
 
     import javax.swing.*;
 

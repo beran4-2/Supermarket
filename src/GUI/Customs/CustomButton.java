@@ -1,4 +1,4 @@
-package GUI;
+package GUI.Customs;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
