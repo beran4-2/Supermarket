@@ -2,6 +2,7 @@
 
     import GUI.Customs.CustomButton;
     import GUI.Customs.CustomWindow;
+    import GUI.Windows.Screens.GameScreen;
 
     import javax.swing.*;
 
@@ -26,7 +27,13 @@
 
             JPanel mainBackground = customWindow.paintBackground("/pictures/MainBackground/MainBackground.png");
             mainBackground.setLayout(null);
-            mainWindw.setContentPane(mainBackground);
+
+            GameScreen gS = new GameScreen(customWindow);
+            JPanel mainGameBackground = gS.getMainGameBackground();
+            mainGameBackground.setVisible(false);
+
+            mainWindw.add(mainBackground);
+            mainWindw.add(mainGameBackground);
 
             int playButtonW = (int) (customWindow.getMonitorWidth() * 0.3135);
             int playButtonH = (int) (customWindow.getMonitorHeight() * 0.162);
@@ -38,7 +45,8 @@
             mainBackground.add(playButton);
             playButton.addActionListener(e -> {
                 System.out.println("game started");
-                mainWindw.dispose();
+                mainBackground.setVisible(false);
+                mainGameBackground.setVisible(true);
             });
 
             int settingsButtonW = (int) (customWindow.getMonitorWidth() * 0.1042);
@@ -52,6 +60,7 @@
                 settingsWindow.setVisible(true);
             });
             mainBackground.add(settingsButton);
+
 
             mainWindw.setVisible(true);
         }
