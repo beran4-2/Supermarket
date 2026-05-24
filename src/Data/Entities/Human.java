@@ -1,4 +1,4 @@
-package Logic.Entities;
+package Data.Entities;
 
 public abstract class Human {
 

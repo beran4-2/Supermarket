@@ -1,6 +1,6 @@
 package Data;
 
-import Logic.Entities.Employee;
+import Data.Entities.Employee;
 
 import com.google.gson.Gson;
 import java.io.InputStream;
