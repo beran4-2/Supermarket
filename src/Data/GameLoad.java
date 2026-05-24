@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class GameLoad {
 
+    private GameSettings settings;
     private ArrayList<Product> products;
     private ArrayList<Employee> employees;
 
@@ -43,6 +44,14 @@ public class GameLoad {
 
     public void setEmployees(ArrayList<Employee> employees) {
         this.employees = employees;
+    }
+
+    public GameSettings getSettings() {
+        return settings;
+    }
+
+    public void setSettings(GameSettings settings) {
+        this.settings = settings;
     }
 
     public void loadDataInfo(){
