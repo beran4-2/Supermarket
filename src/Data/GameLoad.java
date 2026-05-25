@@ -57,5 +57,7 @@ public class GameLoad {
     public void loadDataInfo(){
         System.out.println("Loading data info...");
         System.out.println("Products loaded: " + products.size());
+        System.out.println("Employees loaded: " + employees.size());
+        System.out.println("Settings loaded: " + settings);
     }
 }

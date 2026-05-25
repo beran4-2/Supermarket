@@ -1,0 +1,62 @@
+{
+  "settings": {
+    "startMoney": 50000,
+    "numberOfCustomers": 150
+  },
+  "products": [
+    {
+      "name": "Bread",
+      "purchasePrice": 15,
+      "sellingPrice": 30
+    },
+    {
+      "name": "Milk",
+      "purchasePrice": 20,
+      "sellingPrice": 35
+    },
+    {
+      "name": "Apple",
+      "purchasePrice": 5,
+      "sellingPrice": 12
+    },
+    {
+      "name": "Beer",
+      "purchasePrice": 25,
+      "sellingPrice": 45
+    },
+    {
+      "name": "Coffee",
+      "purchasePrice": 100,
+      "sellingPrice": 180
+    },
+    {
+      "name": "Cheese",
+      "purchasePrice": 40,
+      "sellingPrice": 75
+    },
+    {
+      "name": "Chicken",
+      "purchasePrice": 80,
+      "sellingPrice": 140
+    },
+    {
+      "name": "Water",
+      "purchasePrice": 10,
+      "sellingPrice": 20
+    }
+  ],
+  "employees": [
+    {
+      "name": "Restocker",
+      "salary": 1500,
+      "instantPrice": 5000,
+      "role": "RESTOCKER"
+    },
+    {
+      "name": "Orderer",
+      "salary": 2000,
+      "instantPrice": 6000,
+      "role": "ORDERER"
+    }
+  ]
+}

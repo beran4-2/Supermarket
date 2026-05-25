@@ -19,4 +19,12 @@ public class GameSettings {
     public void setNumberOfCustomers(int numberOfCustomers) {
         this.numberOfCustomers = numberOfCustomers;
     }
+
+    @Override
+    public String toString() {
+        return "GameSettings{" +
+                "startMoney=" + startMoney +
+                ", numberOfCustomers=" + numberOfCustomers +
+                '}';
+    }
 }
