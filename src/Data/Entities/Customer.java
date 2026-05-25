@@ -1,5 +1,7 @@
 package Data.Entities;
 
+import Data.Product;
+
 import java.util.*;
 
 public class Customer extends Human {
@@ -14,11 +16,9 @@ public class Customer extends Human {
         this.random = new Random();
     }
 
-
-
-    public void generatedPreferences(ArrayList<String> availableProducts) {
+    public void generatedPreferences(ArrayList<Product> availableProducts) {
         for (int i = 0; i < availableProducts.size(); i++) {
-            String product = availableProducts.get(i);
+            String product = availableProducts.get(i).getName();
             int chance = random.nextInt(101);
             productPreferences.put(product, chance);
         }

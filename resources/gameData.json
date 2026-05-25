@@ -1,48 +1,82 @@
 {
   "settings": {
     "startMoney": 50000,
-    "numberOfCustomers": 150
+    "numberOfCustomers": 150,
+    "MaxTotalShelves": 2000,
+    "MaxTotalStorage": 3000
   },
   "products": [
     {
       "name": "Bread",
+      "URL": "/Assets/bread.png",
       "purchasePrice": 15,
-      "sellingPrice": 30
+      "sellingPrice": 35,
+      "defaultShelves": 0,
+      "defaultStorage": 0,
+      "defaultOrder": 0
     },
     {
       "name": "Milk",
-      "purchasePrice": 20,
-      "sellingPrice": 35
+      "URL": "/Assets/milk.png",
+      "purchasePrice": 12,
+      "sellingPrice": 25,
+      "defaultShelves": 0,
+      "defaultStorage": 0,
+      "defaultOrder": 0
     },
     {
       "name": "Apple",
+      "URL": "/Assets/apple.png",
       "purchasePrice": 5,
-      "sellingPrice": 12
-    },
-    {
-      "name": "Beer",
-      "purchasePrice": 25,
-      "sellingPrice": 45
+      "sellingPrice": 12,
+      "defaultShelves": 0,
+      "defaultStorage": 0,
+      "defaultOrder": 0
     },
     {
       "name": "Coffee",
-      "purchasePrice": 100,
-      "sellingPrice": 180
+      "URL": "/Assets/coffee.png",
+      "purchasePrice": 80,
+      "sellingPrice": 150,
+      "defaultShelves": 0,
+      "defaultStorage": 0,
+      "defaultOrder": 0
+    },
+    {
+      "name": "Eggs",
+      "URL": "/Assets/eggs.png",
+      "purchasePrice": 20,
+      "sellingPrice": 45,
+      "defaultShelves": 0,
+      "defaultStorage": 0,
+      "defaultOrder": 0
     },
     {
       "name": "Cheese",
-      "purchasePrice": 40,
-      "sellingPrice": 75
-    },
-    {
-      "name": "Chicken",
-      "purchasePrice": 80,
-      "sellingPrice": 140
+      "URL": "/Assets/cheese.png",
+      "purchasePrice": 30,
+      "sellingPrice": 65,
+      "defaultShelves": 0,
+      "defaultStorage": 0,
+      "defaultOrder": 0
     },
     {
       "name": "Water",
-      "purchasePrice": 10,
-      "sellingPrice": 20
+      "URL": "/Assets/water.png",
+      "purchasePrice": 8,
+      "sellingPrice": 15,
+      "defaultShelves": 0,
+      "defaultStorage": 0,
+      "defaultOrder": 0
+    },
+    {
+      "name": "Chicken",
+      "URL": "/Assets/chicken.png",
+      "purchasePrice": 50,
+      "sellingPrice": 110,
+      "defaultShelves": 0,
+      "defaultStorage": 0,
+      "defaultOrder": 0
     }
   ],
   "employees": [
