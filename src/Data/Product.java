@@ -2,13 +2,21 @@ package Data;
 
 public class Product {
     private String name;
+    private String URL;
     private int purchasePrice;
     private int sellingPrice;
+    private int defaultShelves;
+    private int defaultStorage;
+    private int defaultOrder;
 
-    public Product(String name, int purchasePrice, int sellingPrice) {
+    public Product(String name, String URL, int purchasePrice, int sellingPrice, int defaultShelves, int defaultStorage, int defaultOrder) {
         this.name = name;
+        this.URL = URL;
         this.purchasePrice = purchasePrice;
         this.sellingPrice = sellingPrice;
+        this.defaultShelves = defaultShelves;
+        this.defaultStorage = defaultStorage;
+        this.defaultOrder = defaultOrder;
     }
 
     public String getName() {
@@ -17,6 +25,14 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getURL() {
+        return URL;
+    }
+
+    public void setURL(String URL) {
+        this.URL = URL;
     }
 
     public int getPurchasePrice() {
@@ -35,12 +51,39 @@ public class Product {
         this.sellingPrice = sellingPrice;
     }
 
+    public int getDefaultShelves() {
+        return defaultShelves;
+    }
+
+    public void setDefaultShelves(int defaultShelves) {
+        this.defaultShelves = defaultShelves;
+    }
+
+    public int getDefaultStorage() {
+        return defaultStorage;
+    }
+
+    public void setDefaultStorage(int defaultStorage) {
+        this.defaultStorage = defaultStorage;
+    }
+
+    public int getDefaultOrder() {
+        return defaultOrder;
+    }
+
+    public void setDefaultOrder(int defaultOrder) {
+        this.defaultOrder = defaultOrder;
+    }
     @Override
     public String toString() {
         return "Product{" +
                 "name='" + name + '\'' +
+                ", URL='" + URL + '\'' +
                 ", purchasePrice=" + purchasePrice +
                 ", sellingPrice=" + sellingPrice +
+                ", defaultShelves=" + defaultShelves +
+                ", defaultStorage=" + defaultStorage +
+                ", defaultOrder=" + defaultOrder +
                 '}';
     }
 }
