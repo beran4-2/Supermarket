@@ -3,18 +3,27 @@
     import GUI.Customs.CustomButton;
     import GUI.Customs.CustomWindow;
     import GUI.Windows.Screens.GameScreen;
+    import GUI.Windows.Screens.ShelvesScreen;
+    import GUI.Windows.Screens.StorageScreen;
+    import Logic.GameManager;
 
     import javax.swing.*;
 
     public class MainWindow {
-        CustomWindow customWindow;
-        JFrame mainWindw;
-        SettingsWindow settingsWindow;
+        private CustomWindow customWindow;
+        private JFrame mainWindw;
+        private SettingsWindow settingsWindow;
+        private GameManager gameManager;
+
         public MainWindow(){
 
             customWindow = new CustomWindow();
             mainWindw = new JFrame("Main Window");
             settingsWindow = new SettingsWindow(mainWindw);
+
+            gameManager = new GameManager();
+            gameManager.gameInitialization();
+            gameManager.getData().loadDataInfo();
 
             mainWindw.setSize(customWindow.getMonitorWidth(), customWindow.getMonitorHeight());
             mainWindw.setUndecorated(true);
@@ -32,8 +41,45 @@
             JPanel mainGameBackground = gS.getMainGameBackground();
             mainGameBackground.setVisible(false);
 
+            StorageScreen storageScreen = new StorageScreen(customWindow, gameManager.getStoreManager(), gameManager.getProducts());
+            JPanel storageGameBackground = storageScreen.getStorageBackground();
+            storageGameBackground.setVisible(false);
+
+            ShelvesScreen shelvesScreen = new ShelvesScreen(customWindow, gameManager.getStoreManager(), gameManager.getProducts());
+            JPanel shelvesGameBackground = shelvesScreen.getShelvesBackground();
+            shelvesGameBackground.setVisible(false);
+
             mainWindw.add(mainBackground);
             mainWindw.add(mainGameBackground);
+            mainWindw.add(storageGameBackground);
+            mainWindw.add(shelvesGameBackground);
+
+            gS.getStorageButton().addActionListener(e -> {
+                storageScreen.updateUI();
+                mainGameBackground.setVisible(false);
+                storageGameBackground.setVisible(true);
+            });
+            gS.getShelvesButton().addActionListener(e -> {
+                mainGameBackground.setVisible(false);
+                shelvesGameBackground.setVisible(true);
+            });
+
+
+            gS.getBackButton().addActionListener(e -> {
+                mainGameBackground.setVisible(false);
+                mainBackground.setVisible(true);
+            });
+
+            storageScreen.getBackButton().addActionListener(e -> {
+                storageGameBackground.setVisible(false);
+                mainGameBackground.setVisible(true);
+            });
+
+            shelvesScreen.getBackButton().addActionListener(e -> {
+                shelvesGameBackground.setVisible(false);
+                mainGameBackground.setVisible(true);
+            });
+
 
             int playButtonW = (int) (customWindow.getMonitorWidth() * 0.3135);
             int playButtonH = (int) (customWindow.getMonitorHeight() * 0.162);

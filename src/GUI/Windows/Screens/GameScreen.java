@@ -8,6 +8,10 @@ import javax.swing.*;
 public class GameScreen {
 
     private JPanel mainGameBackground;
+    private JButton storageButton;
+    private JButton shelvesButton;
+    private JButton backButton;
+
 
     public GameScreen(CustomWindow customWindow) {
         mainGameBackground = customWindow.paintBackground("/pictures/MainGameBackground/MainGameBackground.png");
@@ -17,33 +21,27 @@ public class GameScreen {
         int backButtonH = (int) (customWindow.getMonitorHeight() * 0.1638);
         int backButtonX = (int) (customWindow.getMonitorWidth() * 0.0156);
         int backButtonY = (int) (customWindow.getMonitorHeight() * 0.8333);
-        JButton backButton = new CustomButton();
+        backButton = new CustomButton();
         CustomButton.buttonImage(backButton, "/pictures/BackButton.png", backButtonW, backButtonH);
         backButton.setLocation(backButtonX, backButtonY);
-        backButton.addActionListener(e -> {
-        });
         mainGameBackground.add(backButton);
 
         int storageButtonW = (int) (customWindow.getMonitorWidth() * 0.1546);
         int storageButtonH = (int) (customWindow.getMonitorHeight() * 0.1907);
         int storageButtonX = (int) (customWindow.getMonitorWidth() * 0.1718);
         int storageButtonY = (int) (customWindow.getMonitorHeight() * 0.0833);
-        JButton storageButton = new CustomButton();
+        storageButton = new CustomButton();
         CustomButton.buttonImage(storageButton, "/pictures/MainGameBackground/MainGameStorageButton.png", storageButtonW, storageButtonH);
         storageButton.setLocation(storageButtonX, storageButtonY);
-        storageButton.addActionListener(e -> {
-        });
         mainGameBackground.add(storageButton);
 
         int shelvesButtonW = (int) (customWindow.getMonitorWidth() * 0.1986);
         int shelvesButtonH = (int) (customWindow.getMonitorHeight() * 0.1315);
         int shelvesButtonX = (int) (customWindow.getMonitorWidth() * 0.4688);
         int shelvesButtonY = (int) (customWindow.getMonitorHeight() * 0.1204);
-        JButton shelvesButton = new CustomButton();
+        shelvesButton = new CustomButton();
         CustomButton.buttonImage(shelvesButton, "/pictures/MainGameBackground/MainGameShelvesButton.png", shelvesButtonW, shelvesButtonH);
         shelvesButton.setLocation(shelvesButtonX, shelvesButtonY);
-        shelvesButton.addActionListener(e -> {
-        });
         mainGameBackground.add(shelvesButton);
 
         int restockButtonW = (int) (customWindow.getMonitorWidth() * 0.1480);
@@ -53,8 +51,6 @@ public class GameScreen {
         JButton restockButton = new CustomButton();
         CustomButton.buttonImage(restockButton, "/pictures/MainGameBackground/MainGameRestockButton.png", restockButtonW, restockButtonH);
         restockButton.setLocation(restockButtonX, restockButtonY);
-        restockButton.addActionListener(e -> {
-        });
         mainGameBackground.add(restockButton);
 
         int continueButtonW = (int) (customWindow.getMonitorWidth() * 0.2);
@@ -64,12 +60,13 @@ public class GameScreen {
         JButton continueButton = new CustomButton();
         CustomButton.buttonImage(continueButton, "/pictures/MainGameBackground/MainGameContinueButton.png", continueButtonW, continueButtonH);
         continueButton.setLocation(continueButtonX, continueButtonY);
-        continueButton.addActionListener(e -> {
-        });
         mainGameBackground.add(continueButton);
     }
 
     public JPanel getMainGameBackground() {
         return mainGameBackground;
     }
+    public JButton getStorageButton() { return storageButton; }
+    public JButton getShelvesButton() { return shelvesButton; }
+    public JButton getBackButton() { return backButton; }
 }
