@@ -3,18 +3,16 @@ package Logic;
 import Data.Product;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.ArrayList;
 
 public class StoreManager {
 
-    private Map<String, Integer> shelves;
-    private Map<String, Integer> storage;
-    private Map<String, Integer> inOrder;
+    private HashMap<String, Integer> shelves;
+    private HashMap<String, Integer> storage;
+    private HashMap<String, Integer> inOrder;
 
     private int maxTotalShelves;
     private int maxTotalStorage;
-    private int maxTotalInOrder;
 
     public StoreManager(ArrayList<Product> availableProducts, GameManager gameManager) {
         shelves = new HashMap<>();
@@ -23,7 +21,6 @@ public class StoreManager {
 
         this.maxTotalShelves = gameManager.getData().getSettings().getMaxTotalShelves();
         this.maxTotalStorage = gameManager.getData().getSettings().getMaxTotalStorage();
-        this.maxTotalInOrder = maxTotalStorage - getCurrentTotalStorage();
 
         for (int i = 0; i <availableProducts.size(); i++) {
             storage.put(availableProducts.get(i).getName(), availableProducts.get(i).getDefaultStorage());
@@ -76,26 +73,41 @@ public class StoreManager {
         return false;
     }
 
-    public boolean moveToOrder(String productName, int amount) {
-        return true;
+    public void addToOrder(String productName, int amount) {
+        int currentAmount = inOrder.getOrDefault(productName, 0);
+        inOrder.put(productName, currentAmount + amount);
     }
 
-    public boolean moveFromInOrderToStorage(String productName, int amount) {
-        return true;
+    public void addToStorage(String productName, int amount) {
+        int currentAmount = storage.getOrDefault(productName, 0);
+        storage.put(productName, currentAmount + amount);
     }
+
+    public void processDeliveries() {
+        for (String pName : inOrder.keySet()) {
+            int amount = inOrder.get(pName);
+            if (amount > 0) {
+                addToStorage(pName, amount);
+            }
+        }
+        for (String pName : inOrder.keySet()) {
+            inOrder.put(pName, 0);
+        }
+    }
+
 
     public boolean sellOneFromShelves(String productName) {
         int procuctInShelves = shelves.get(productName);
-        if (procuctInShelves >= 0) {
+        if (procuctInShelves > 0) {
             shelves.put(productName, procuctInShelves - 1);
             return true;
         }
         return false;
     }
 
-    public Map<String, Integer> getShelves() { return shelves; }
-    public Map<String, Integer> getStorage() { return storage; }
-    public Map<String, Integer> getInOrder() { return inOrder; }
+    public HashMap<String, Integer> getShelves() { return shelves; }
+    public HashMap<String, Integer> getStorage() { return storage; }
+    public HashMap<String, Integer> getInOrder() { return inOrder; }
     public int getMaxTotalShelves() { return maxTotalShelves; }
     public int getMaxTotalStorage() { return maxTotalStorage; }
 }

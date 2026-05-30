@@ -3,6 +3,7 @@
     import GUI.Customs.CustomButton;
     import GUI.Customs.CustomWindow;
     import GUI.Windows.Screens.GameScreen;
+    import GUI.Windows.Screens.RestockScreen;
     import GUI.Windows.Screens.ShelvesScreen;
     import GUI.Windows.Screens.StorageScreen;
     import Logic.GameManager;
@@ -40,6 +41,7 @@
             GameScreen gS = new GameScreen(customWindow);
             JPanel mainGameBackground = gS.getMainGameBackground();
             mainGameBackground.setVisible(false);
+            gS.updateLabels(gameManager.getCurrentBalance(), gameManager.getCurrentDay(), gameManager.getCustomers().size());
 
             StorageScreen storageScreen = new StorageScreen(customWindow, gameManager.getStoreManager(), gameManager.getProducts());
             JPanel storageGameBackground = storageScreen.getStorageBackground();
@@ -49,10 +51,15 @@
             JPanel shelvesGameBackground = shelvesScreen.getShelvesBackground();
             shelvesGameBackground.setVisible(false);
 
+            RestockScreen restockScreen = new RestockScreen(customWindow, gameManager.getProducts());
+            JPanel restockGameBackground = restockScreen.getRestockBackground();
+            restockGameBackground.setVisible(false);
+
             mainWindw.add(mainBackground);
             mainWindw.add(mainGameBackground);
             mainWindw.add(storageGameBackground);
             mainWindw.add(shelvesGameBackground);
+            mainWindw.add(restockGameBackground);
 
             gS.getStorageButton().addActionListener(e -> {
                 storageScreen.updateUI();
@@ -60,16 +67,19 @@
                 storageGameBackground.setVisible(true);
             });
             gS.getShelvesButton().addActionListener(e -> {
+                shelvesScreen.updateUI();
                 mainGameBackground.setVisible(false);
                 shelvesGameBackground.setVisible(true);
             });
-
-
             gS.getBackButton().addActionListener(e -> {
                 mainGameBackground.setVisible(false);
                 mainBackground.setVisible(true);
             });
+            gS.getContinueButton().addActionListener(e -> {
+               gameManager.nextTurn();
+                gS.updateLabels(gameManager.getCurrentBalance(), gameManager.getCurrentDay(), gameManager.getCustomers().size());
 
+            });
             storageScreen.getBackButton().addActionListener(e -> {
                 storageGameBackground.setVisible(false);
                 mainGameBackground.setVisible(true);
@@ -78,6 +88,20 @@
             shelvesScreen.getBackButton().addActionListener(e -> {
                 shelvesGameBackground.setVisible(false);
                 mainGameBackground.setVisible(true);
+            });
+            gS.getRestockButton().addActionListener(e -> {
+                mainGameBackground.setVisible(false);
+                restockGameBackground.setVisible(true);
+            });
+            restockScreen.getBackButton().addActionListener(e -> {
+                restockGameBackground.setVisible(false);
+                mainGameBackground.setVisible(true);
+            });
+            restockScreen.getBuyButton().addActionListener(e -> {
+                boolean success = gameManager.processRestock(restockScreen.getCart(), restockScreen.getCurrentTotalCost());
+                if (success) {
+                    restockScreen.resetCart();
+                }
             });
 
 
