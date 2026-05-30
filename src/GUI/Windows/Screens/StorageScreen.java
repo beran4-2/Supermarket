@@ -16,6 +16,7 @@ public class StorageScreen {
     private JButton backButton;
     private JPanel productsPanel;
     private JLabel capacityLabel;
+    private JLabel pendingLabel;
     private StoreManager storeManager;
     private ArrayList<Product> products;
     private int monitorWidth;
@@ -42,6 +43,13 @@ public class StorageScreen {
         int capY = (int)(monitorHeight * 0.22);
         capacityLabel.setBounds(capX, capY, capW, capH);
         storageBackground.add(capacityLabel);
+
+        pendingLabel = new JLabel();
+        pendingLabel.setFont(new Font("Arial", Font.BOLD, (int)(monitorHeight * 0.02)));
+        pendingLabel.setForeground(new Color(119, 56, 35));
+        pendingLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        pendingLabel.setBounds(capX, (int)(monitorHeight * 0.8), capW, capH);
+        storageBackground.add(pendingLabel);
 
         productsPanel = new JPanel();
         productsPanel.setLayout(new GridLayout(4, 2, (int)(monitorWidth * 0.02), (int)(monitorHeight * 0.009)));
@@ -74,6 +82,13 @@ public class StorageScreen {
 
     public void updateUI() {
         capacityLabel.setText("current in storage: " + storeManager.getCurrentTotalStorage() + " / " + storeManager.getMaxTotalStorage());
+
+        int totalPending = 0;
+        for (int amount : storeManager.getInOrder().values()) {
+            totalPending += amount;
+        }
+        pendingLabel.setText("Pending items: " + totalPending);
+
         productsPanel.removeAll();
 
         int fontSize = (int)(monitorHeight * 0.035);

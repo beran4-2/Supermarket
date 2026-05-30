@@ -3,8 +3,13 @@ package Data;
 public class GameSettings {
     private int startMoney;
     private int numberOfCustomers;
+    private int basePercentProd;
     private int MaxTotalShelves;
     private int MaxTotalStorage;
+    private int chanceIncrease;
+    private int currentDay;
+    private int lowRandomCustomers;
+    private int highRandomCustomers;
 
     public int getStartMoney() {
         return startMoney;
@@ -38,13 +43,58 @@ public class GameSettings {
         MaxTotalStorage = maxTotalStorage;
     }
 
+    public int getBasePercentProd() {
+        return basePercentProd;
+    }
+
+    public void setBasePercentProd(int basePercentProd) {
+        this.basePercentProd = basePercentProd;
+    }
+
+    public int getChanceIncrease() {
+        return chanceIncrease;
+    }
+
+    public void setChanceIncrease(int chanceIncrease) {
+        this.chanceIncrease = chanceIncrease;
+    }
+
+    public int getCurrentDay() {
+        return currentDay;
+    }
+
+    public void setCurrentDay(int currentDay) {
+        this.currentDay = currentDay;
+    }
+
+    public int getLowRandomCustomers() {
+        return lowRandomCustomers;
+    }
+
+    public void setLowRandomCustomers(int lowRandomCustomers) {
+        this.lowRandomCustomers = lowRandomCustomers;
+    }
+
+    public int getHighRandomCustomers() {
+        return highRandomCustomers;
+    }
+
+    public void setHighRandomCustomers(int highRandomCustomers) {
+        this.highRandomCustomers = highRandomCustomers;
+    }
+
     @Override
     public String toString() {
         return "GameSettings{" +
                 "startMoney=" + startMoney +
                 ", numberOfCustomers=" + numberOfCustomers +
+                ", basePercentProd=" + basePercentProd +
                 ", MaxTotalShelves=" + MaxTotalShelves +
                 ", MaxTotalStorage=" + MaxTotalStorage +
+                ", chanceIncrease=" + chanceIncrease +
+                ", currentDay=" + currentDay +
+                ", lowRandomCustomers=" + lowRandomCustomers +
+                ", highRandomCustomers=" + highRandomCustomers +
                 '}';
     }
 }
