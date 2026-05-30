@@ -1,5 +1,7 @@
 package Data.Entities;
 
+import Logic.GameManager;
+
 public abstract class Human {
 
     protected String name;
@@ -18,6 +20,6 @@ public abstract class Human {
         this.name = name;
     }
 
-    public abstract void update();
+    public abstract boolean update(GameManager gameManager);
 
 }
