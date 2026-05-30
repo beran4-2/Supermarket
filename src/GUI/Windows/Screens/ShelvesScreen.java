@@ -9,21 +9,32 @@ import Logic.StoreManager;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ShelvesScreen {
 
     private JPanel shelvesBackground;
     private JButton backButton;
+    private JLabel capacityLabel;
+    private StoreManager storeManager;
+    private ArrayList<Product> products;
+    private int monitorWidth;
+    private int monitorHeight;
+
+    private HashMap<String, JLabel> countLabels;
 
     public ShelvesScreen(CustomWindow customWindow, StoreManager storeManager, ArrayList<Product> products) {
+        this.storeManager = storeManager;
+        this.products = products;
+        this.monitorWidth = CustomWindow.getMonitorWidth();
+        this.monitorHeight = CustomWindow.getMonitorHeight();
+        this.countLabels = new HashMap<>();
+
         shelvesBackground = customWindow.paintBackground("/pictures/MainGameBackground/MainShelvesBackground.png");
         shelvesBackground.setLayout(null);
 
-        int monitorWidth = CustomWindow.getMonitorWidth();
-        int monitorHeight = CustomWindow.getMonitorHeight();
-
-        JLabel capacityLabel = new JLabel(storeManager.getCurrentTotalShelves() + " / " + storeManager.getMaxTotalShelves());
-        capacityLabel.setFont(new Font("Arial", Font.BOLD, (int)(monitorHeight * 0.035)));
+        capacityLabel = new JLabel();
+        capacityLabel.setFont(new Font("Arial", Font.BOLD, (int)(monitorHeight * 0.02)));
         capacityLabel.setForeground(new Color(119, 56, 35));
         capacityLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -31,7 +42,6 @@ public class ShelvesScreen {
         int capH = (int)(monitorHeight * 0.05);
         int capX = (monitorWidth / 2) - (capW / 2);
         int capY = (int)(monitorHeight * 0.22);
-
         capacityLabel.setBounds(capX, capY, capW, capH);
         shelvesBackground.add(capacityLabel);
 
@@ -40,16 +50,17 @@ public class ShelvesScreen {
         productsPanel.setOpaque(false);
 
         int fontSize = (int)(monitorHeight * 0.026);
-        int nameW = (int)(monitorWidth * 0.057);
+        int nameW = (int)(monitorWidth * 0.11);
         int nameH = (int)(monitorHeight * 0.101);
         int imageW = (int)(monitorWidth * 0.09);
         int imageH = (int)(monitorHeight * 0.101);
-        int countW = (int)(monitorWidth * 0.05);
+
+        int countW = (int)(monitorWidth * 0.03);
         int countH = (int)(monitorHeight * 0.101);
-        int flowHGap = (int)(monitorWidth * 0.005);
+        int flowHGap = (int)(monitorWidth * 0.001);
         int flowVGap = (int)(monitorHeight * 0.004);
 
-        int btnW = (int)(monitorWidth * 0.028);
+        int btnW = (int)(monitorWidth * 0.022);
         int btnH = (int)(monitorHeight * 0.04);
         Font btnFont = new Font("Arial", Font.BOLD, (int)(monitorHeight * 0.015));
         Color btnBg = new Color(119, 56, 35);
@@ -60,11 +71,12 @@ public class ShelvesScreen {
             cellPanel.setLayout(new FlowLayout(FlowLayout.CENTER, flowHGap, flowVGap));
             cellPanel.setOpaque(false);
 
-            JLabel nameLabel = new JLabel(product.getName());
+            JLabel nameLabel = new JLabel(product.getName() + " ($" + product.getSellingPrice() + ")");
             nameLabel.setFont(new Font("Arial", Font.BOLD, fontSize));
             nameLabel.setForeground(Color.WHITE);
             nameLabel.setPreferredSize(new Dimension(nameW, nameH));
             nameLabel.setVerticalAlignment(SwingConstants.CENTER);
+            nameLabel.setHorizontalAlignment(SwingConstants.RIGHT);
             cellPanel.add(nameLabel);
 
             JButton minus10Btn = createStyledButton("-10", btnW, btnH, btnFont, btnBg, btnFg);
@@ -83,30 +95,26 @@ public class ShelvesScreen {
             JButton plus10Btn = createStyledButton("+10", btnW, btnH, btnFont, btnBg, btnFg);
             cellPanel.add(plus10Btn);
 
-            int count = storeManager.getShelves().getOrDefault(product.getName(), 0);
-            JLabel countLabel = new JLabel(String.valueOf(count));
+            JLabel countLabel = new JLabel();
             countLabel.setFont(new Font("Arial", Font.BOLD, fontSize));
             countLabel.setForeground(new Color(119, 56, 35));
             countLabel.setPreferredSize(new Dimension(countW, countH));
             countLabel.setVerticalAlignment(SwingConstants.CENTER);
             cellPanel.add(countLabel);
 
-            Runnable updateUI = () -> {
-                countLabel.setText(String.valueOf(storeManager.getShelves().getOrDefault(product.getName(), 0)));
-                capacityLabel.setText(storeManager.getCurrentTotalShelves() + " / " + storeManager.getMaxTotalShelves());
-            };
+            countLabels.put(product.getName(), countLabel);
 
             minus10Btn.addActionListener(e -> {
-                if (storeManager.moveFromShelvesToStorage(product.getName(), 10)) updateUI.run();
+                if (storeManager.moveFromShelvesToStorage(product.getName(), 10)) updateUI();
             });
             minus1Btn.addActionListener(e -> {
-                if (storeManager.moveFromShelvesToStorage(product.getName(), 1)) updateUI.run();
+                if (storeManager.moveFromShelvesToStorage(product.getName(), 1)) updateUI();
             });
             plus1Btn.addActionListener(e -> {
-                if (storeManager.moveFromStorageToShelves(product.getName(), 1)) updateUI.run();
+                if (storeManager.moveFromStorageToShelves(product.getName(), 1)) updateUI();
             });
             plus10Btn.addActionListener(e -> {
-                if (storeManager.moveFromStorageToShelves(product.getName(), 10)) updateUI.run();
+                if (storeManager.moveFromStorageToShelves(product.getName(), 10)) updateUI();
             });
 
             productsPanel.add(cellPanel);
@@ -133,6 +141,20 @@ public class ShelvesScreen {
         CustomButton.buttonImage(backButton, "/pictures/BackButton.png", backButtonW, backButtonH);
         backButton.setLocation(backButtonX, backButtonY);
         shelvesBackground.add(backButton);
+
+        updateUI();
+    }
+
+    public void updateUI() {
+        capacityLabel.setText(storeManager.getCurrentTotalShelves() + " / " + storeManager.getMaxTotalShelves());
+
+        for (Product product : products) {
+            JLabel label = countLabels.get(product.getName());
+            if (label != null) {
+                int currentCount = storeManager.getShelves().getOrDefault(product.getName(), 0);
+                label.setText(String.valueOf(currentCount));
+            }
+        }
     }
 
     private JButton createStyledButton(String text, int width, int height, Font font, Color bg, Color fg) {
