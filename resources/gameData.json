@@ -2,8 +2,13 @@
   "settings": {
     "startMoney": 50000,
     "numberOfCustomers": 150,
+    "basePercentProd": 10,
     "MaxTotalShelves": 2000,
-    "MaxTotalStorage": 3000
+    "MaxTotalStorage": 3000,
+    "chanceIncrease": 5,
+    "currentDay":0,
+    "lowRandomCustomers": 10,
+    "highRandomCustomers": 15
   },
   "products": [
     {
@@ -12,7 +17,7 @@
       "purchasePrice": 15,
       "sellingPrice": 35,
       "defaultShelves": 0,
-      "defaultStorage": 1500,
+      "defaultStorage": 1900,
       "defaultOrder": 0
     },
     {
@@ -84,12 +89,14 @@
       "name": "Restocker",
       "salary": 1500,
       "instantPrice": 5000,
+      "workCapacity": 50,
       "role": "RESTOCKER"
     },
     {
       "name": "Orderer",
       "salary": 2000,
       "instantPrice": 6000,
+      "workCapacity": 50,
       "role": "ORDERER"
     }
   ]
