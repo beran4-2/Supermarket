@@ -12,6 +12,6 @@ Supermarket Simulator is a desktop simulation game developed in Java using the S
 ## Installation & Running 🚀
 1. Ensure you have Java (JRE/JDK) installed on your system.
 2. Download the project `.jar` file.
-3. Run the application via terminal/command prompt:
-   ```bash
+3. Run the application by double-clicking the `.jar` file, or launch it via terminal using:   
+4. ```bash
    java -jar SupermarketSimulator.jar
