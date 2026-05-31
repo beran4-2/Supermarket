@@ -1,14 +1,21 @@
 package Data;
-
+/**
+ * Holds all the configuration and starting values for the game.
+ * This data is loaded from the JSON file at the beginning.
+ */
 public class GameSettings {
     private int startMoney;
     private int numberOfCustomers;
+    /** The starting percentage chance for a customer to buy a product. */
     private int basePercentProd;
     private int MaxTotalShelves;
     private int MaxTotalStorage;
+    /** How much the buy chance increases if a customer decides not to buy anything. */
     private int chanceIncrease;
     private int currentDay;
+    /** The minimum number of extra random customers per day. */
     private int lowRandomCustomers;
+    /** The maximum number of extra random customers per day. */
     private int highRandomCustomers;
     private int upgrade100StoragePrice;
     private int upgrade100ShelvesPrice;

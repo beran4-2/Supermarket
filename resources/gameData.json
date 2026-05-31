@@ -1,12 +1,12 @@
 {
   "settings": {
-    "startMoney": 5000000,
-    "numberOfCustomers": 150,
+    "startMoney": 1000,
+    "numberOfCustomers": 75,
     "basePercentProd": 10,
-    "MaxTotalShelves": 2000,
-    "MaxTotalStorage": 3000,
+    "MaxTotalShelves": 500,
+    "MaxTotalStorage": 1000,
     "chanceIncrease": 5,
-    "currentDay":0,
+    "currentDay":1,
     "lowRandomCustomers": 10,
     "highRandomCustomers": 15,
     "upgrade100StoragePrice": 500,
@@ -19,8 +19,8 @@
       "URL": "/pictures/Assets/bread.png",
       "purchasePrice": 15,
       "sellingPrice": 35,
-      "defaultShelves": 0,
-      "defaultStorage": 1900,
+      "defaultShelves": 10,
+      "defaultStorage": 0,
       "defaultOrder": 0
     },
     {
@@ -28,7 +28,7 @@
       "URL": "/pictures/Assets/milk.png",
       "purchasePrice": 12,
       "sellingPrice": 25,
-      "defaultShelves": 0,
+      "defaultShelves": 10,
       "defaultStorage": 0,
       "defaultOrder": 0
     },
@@ -37,7 +37,7 @@
       "URL": "/pictures/Assets/apple.png",
       "purchasePrice": 5,
       "sellingPrice": 12,
-      "defaultShelves": 0,
+      "defaultShelves": 10,
       "defaultStorage": 0,
       "defaultOrder": 0
     },
@@ -46,7 +46,7 @@
       "URL": "/pictures/Assets/coffee.png",
       "purchasePrice": 80,
       "sellingPrice": 150,
-      "defaultShelves": 0,
+      "defaultShelves": 10,
       "defaultStorage": 0,
       "defaultOrder": 0
     },
@@ -55,7 +55,7 @@
       "URL": "/pictures/Assets/eggs.png",
       "purchasePrice": 20,
       "sellingPrice": 45,
-      "defaultShelves": 0,
+      "defaultShelves": 10,
       "defaultStorage": 0,
       "defaultOrder": 0
     },
@@ -64,7 +64,7 @@
       "URL": "/pictures/Assets/cheese.png",
       "purchasePrice": 30,
       "sellingPrice": 65,
-      "defaultShelves": 0,
+      "defaultShelves": 10,
       "defaultStorage": 0,
       "defaultOrder": 0
     },
@@ -73,7 +73,7 @@
       "URL": "/pictures/Assets/water.png",
       "purchasePrice": 8,
       "sellingPrice": 15,
-      "defaultShelves": 0,
+      "defaultShelves": 10,
       "defaultStorage": 0,
       "defaultOrder": 0
     },
@@ -82,7 +82,7 @@
       "URL": "/pictures/Assets/chicken.png",
       "purchasePrice": 50,
       "sellingPrice": 110,
-      "defaultShelves": 0,
+      "defaultShelves": 10,
       "defaultStorage": 0,
       "defaultOrder": 0
     }

@@ -5,7 +5,10 @@ import GUI.Customs.CustomLabel;
 import GUI.Customs.CustomWindow;
 import javax.swing.*;
 import java.awt.*;
-
+/**
+ * Represents the main hub screen of the game.
+ * From here, the player can see their stats and navigate to all other menus
+ */
 public class GameScreen {
 
     private JPanel mainGameBackground;
@@ -20,7 +23,12 @@ public class GameScreen {
     private JLabel dayLabel;
     private JLabel activeCustomersLabel;
 
-
+    /**
+     * Constructs the main game screen and initializes all UI components.
+     * Buttons and labels are positioned dynamically based on the monitor resolution.
+     *
+     * @param customWindow The window helper used for screen dimensions and background painting.
+     */
     public GameScreen(CustomWindow customWindow) {
         mainGameBackground = customWindow.paintBackground("/pictures/MainGameBackground/MainGameBackground.png");
         mainGameBackground.setLayout(null);
@@ -122,6 +130,14 @@ public class GameScreen {
 
     }
 
+    /**
+     * Updates the information tab with the latest game statistics.
+     * This should be called whenever the day changes or money is spent/earned.
+     *
+     * @param balance The current amount of money the player has.
+     * @param day The current in-game day number.
+     * @param activeCustomers The number of customers currently shopping in the store.
+     */
     public void updateLabels(int balance, int day, int activeCustomers) {
         balanceLabel.setText("$ " + balance);
         dayLabel.setText("Day: " + day);

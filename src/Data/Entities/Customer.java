@@ -5,18 +5,33 @@ import Logic.GameManager;
 
 import java.util.*;
 
+/**
+ * Represents a customer entity browsing and shopping in the store.
+ * his class handles customer product selection
+ *
+ */
 public class Customer extends Human {
 
 
     private HashMap<String, Integer> productPreferences;
     private Random random;
 
+    /**
+     * Constructs a new Customer instance.
+     * @param name The display name of the customer.
+     * @param id The unique identifier.
+     */
     public Customer(String name, int id) {
         super(name, id);
         this.productPreferences = new HashMap<>();
         this.random = new Random();
     }
 
+
+    /**
+     * Generates initial purchase probabilities for all available products.
+     * @param availableProducts The list of products currently offered in the store.
+     */
     public void generatedPreferences(ArrayList<Product> availableProducts) {
         for (int i = 0; i < availableProducts.size(); i++) {
             String product = availableProducts.get(i).getName();
@@ -25,6 +40,15 @@ public class Customer extends Human {
         }
     }
 
+
+    /**
+     * updates the customer's shopping behavior.
+     * It tries to buy products based on their current interest.
+     * If they don't buy, their interest increases for the next time.
+     *
+     * @param gameManager The manager providing access to the store's current state.
+     * @return
+     */
     @Override
     public boolean update(GameManager gameManager) {
         for (String product : productPreferences.keySet()) {

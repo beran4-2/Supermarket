@@ -11,6 +11,10 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Represents the graphical user interface screen for managing store shelves.
+ * This screen allows the player to move products between the back storage and the front shelves.
+ */
 public class ShelvesScreen {
 
     private JPanel shelvesBackground;
@@ -23,6 +27,14 @@ public class ShelvesScreen {
 
     private HashMap<String, JLabel> countLabels;
 
+    /**
+     * Constructs the shelves management screen and initializes all UI components.
+     * Generates a grid of products with controls to move inventory between storage and shelves.
+     *
+     * @param customWindow The utility instance handling window dimensions and background rendering.
+     * @param storeManager The manager handling inventory logic and capacities.
+     * @param products     The list of available products in the game.
+     */
     public ShelvesScreen(CustomWindow customWindow, StoreManager storeManager, ArrayList<Product> products) {
         this.storeManager = storeManager;
         this.products = products;
@@ -145,6 +157,10 @@ public class ShelvesScreen {
         updateUI();
     }
 
+    /**
+     * Refreshes the user interface to reflect the current state of the shelves.
+     * Updates the total capacity label and the individual quantities of each product.
+     */
     public void updateUI() {
         capacityLabel.setText(storeManager.getCurrentTotalShelves() + " / " + storeManager.getMaxTotalShelves());
 
@@ -157,6 +173,17 @@ public class ShelvesScreen {
         }
     }
 
+    /**
+     * A utility method to generate uniformly styled buttons for inventory adjustment.
+     *
+     * @param text   The text displayed on the button.
+     * @param width  The preferred width of the button.
+     * @param height The preferred height of the button.
+     * @param font   The font applied to the text.
+     * @param bg     The background color of the button.
+     * @param fg     The foreground (text) color.
+     * @return A configured JButton instance.
+     */
     private JButton createStyledButton(String text, int width, int height, Font font, Color bg, Color fg) {
         JButton btn = new JButton(text);
         btn.setPreferredSize(new Dimension(width, height));

@@ -7,6 +7,10 @@ import GUI.Music.MusicManager;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Represents the settings dialog of the game.
+ * Allows the player to toggle background music on/off and quit the application.
+ */
 public class SettingsWindow extends JDialog {
     CustomWindow customWindow;
     private boolean isOnActivated = true;
@@ -24,6 +28,12 @@ public class SettingsWindow extends JDialog {
     private int closeButtonPosX = CustomWindow.getMonitorWidth() / 2 - closeButtonWidth / 2;
     private int closeButtonPosY = CustomWindow.getMonitorHeight() - CustomWindow.getMonitorHeight() / 3;
 
+    /**
+     * Constructs the settings dialog, initializes buttons for music control and quitting,
+     * and sets up the background.
+     *
+     * @param owner The parent frame that opened this dialog.
+     */
     public SettingsWindow(Frame owner) {
 
         super(owner, "Settings", true);
@@ -81,6 +91,9 @@ public class SettingsWindow extends JDialog {
         });
     }
 
+    /**
+     * Determines which music button should be visible based on the current state.
+     */
     public void showButton() {
         if (isOnActivated) {
             musicButtonOn.setVisible(true);

@@ -10,6 +10,10 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Represents the screen where the player can manually order products for the store.
+ * It provides a shopping cart interface to select quantities and calculate the total cost.
+ */
 public class RestockScreen {
 
     private JPanel restockBackground;
@@ -24,6 +28,12 @@ public class RestockScreen {
     private int monitorWidth;
     private int monitorHeight;
 
+    /**
+     * Constructs the restock screen and builds the layout for all available products.
+     *
+     * @param customWindow The window helper used for screen dimensions and background painting.
+     * @param products The list of all available products in the game to be displayed.
+     */
     public RestockScreen(CustomWindow customWindow, ArrayList<Product> products) {
         this.monitorWidth = CustomWindow.getMonitorWidth();
         this.monitorHeight = CustomWindow.getMonitorHeight();
@@ -178,6 +188,10 @@ public class RestockScreen {
         updateUI();
     }
 
+    /**
+     * Updates the text labels on the screen, showing the current total cost
+     * and the exact amount of each product currently in the cart.
+     */
     public void updateUI() {
         totalPriceLabel.setText("Total Cost: $ " + currentTotalCost);
 
@@ -188,6 +202,10 @@ public class RestockScreen {
         }
     }
 
+    /**
+     * Empties the shopping cart and resets the total cost to zero.
+     * Usually called after a successful purchase.
+     */
     public void resetCart() {
         for (String key : cart.keySet()) {
             cart.put(key, 0);
@@ -196,6 +214,17 @@ public class RestockScreen {
         updateUI();
     }
 
+    /**
+     * A helper method to create standardized buttons for the plus and minus controls.
+     *
+     * @param text The text displayed on the button.
+     * @param width The required width of the button.
+     * @param height The required height of the button.
+     * @param font The font used for the button text.
+     * @param bg The background color of the button.
+     * @param fg The text (foreground) color of the button.
+     * @return A fully styled JButton.
+     */
     private JButton createStyledButton(String text, int width, int height, Font font, Color bg, Color fg) {
         JButton btn = new JButton(text);
         btn.setPreferredSize(new Dimension(width, height));

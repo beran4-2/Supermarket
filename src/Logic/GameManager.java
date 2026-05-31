@@ -7,6 +7,11 @@ import Data.Product;
 
 import java.util.ArrayList;
 
+/**
+ * The main logic controller for the game.
+ * Manages game state, customer generation, employee updates, store upgrades,
+ * and the daily turn-based progression.
+ */
 public class GameManager {
 
     private GameLoad data;
@@ -21,6 +26,10 @@ public class GameManager {
 
     private ArrayList<Product> products;
 
+    /**
+     * Initializes the game by data from the JSON resource,
+     * setting up the store manager, and generating the initial number of customers.
+     */
     public void gameInitialization(){
         data = GameLoad.loadDataFromResource("/gameData.json");
         employees = data.getEmployees();
@@ -34,6 +43,10 @@ public class GameManager {
         generateNewCustomers(data.getSettings().getNumberOfCustomers());
     }
 
+    /**
+     * Creates a specific number of new customer objects and adds them to the game.
+     * * @param number The number of customers to generate.
+     */
     public void generateNewCustomers(int number) {
         for (int i = 0; i < number; i++) {
             Customer newCustomer = new Customer("Customer", customers.size());
@@ -42,6 +55,11 @@ public class GameManager {
         }
     }
 
+    /**
+     * Processes one full game day.
+     * Updates customers, triggers employee tasks, deducts weekly salaries,
+     * processes pending deliveries, and increments the day counter.
+     */
     public void nextTurn(){
         for (int i = customers.size() - 1; i >= 0; i--) {
             if (!customers.get(i).update(this)){
@@ -64,6 +82,14 @@ public class GameManager {
         currentDay++;
     }
 
+    /**
+     * Checks if the player has enough balance and storage space to restock the requested items.
+     * If valid, updates the balance and adds items to the pending order queue.
+     *
+     * @param cart A map of product names and quantities to order.
+     * @param totalCost The total cost of the order.
+     * @return True if the order was processed successfully, false otherwise.
+     */
     public boolean processRestock(java.util.HashMap<String, Integer> cart, int totalCost) {
         int totalItemsInCart = 0;
         for (int amount : cart.values()) {
@@ -92,29 +118,37 @@ public class GameManager {
         return false;
     }
 
+    /**
+     * Generates a random number of customers within a specified range.
+     * this method is called every day
+     * @param lowRandom The minimum number of customers to add.
+     * @param highRandom The maximum number of customers to add.
+     */
     public void generateRandomCustomers(int lowRandom, int highRandom) {
         java.util.Random random = new java.util.Random();
         int count = random.nextInt((highRandom - lowRandom) + 1) + lowRandom;
         generateNewCustomers(count);
     }
 
+    /**
+     * Attempts to hire an employee using a template and deducting the cost from the balance.
+     * @param template The employee prototype to hire.
+     * @return True if the hire was successful, false if balance was insufficient.
+     */
     public boolean hireEmployee(Employee template) {
         if (currentBalance >= template.getInstantPrice()) {
             currentBalance -= template.getInstantPrice();
-            Employee newEmployee = new Employee(
-                    template.getName(),
-                    (int)(Math.random() * 10000),
-                    template.getInstantPrice(),
-                    template.getSalary(),
-                    template.getWorkCapacity(),
-                    template.getRole()
-            );
+            Employee newEmployee = new Employee(template.getName(), (int)(Math.random() * 10000), template.getInstantPrice(), template.getSalary(), template.getWorkCapacity(), template.getRole());
             hiredEmployees.add(newEmployee);
             return true;
         }
         return false;
     }
 
+    /**
+     * Purchases a storage capacity upgrade, increasing the limit and updating the cost.
+     * @return True if the upgrade was successful, false if balance was insufficient.
+     */
     public boolean upgradeStorage() {
         int currentPrice = data.getSettings().getUpgrade100StoragePrice();
         if (currentBalance >= currentPrice) {
@@ -132,6 +166,10 @@ public class GameManager {
         return false;
     }
 
+    /**
+     * Purchases a shelves capacity upgrade, increasing the limit and updating the cost.
+     * @return True if the upgrade was successful, false if balance was insufficient.
+     */
     public boolean upgradeShelves() {
         int currentPrice = data.getSettings().getUpgrade100ShelvesPrice();
         if (currentBalance >= currentPrice) {

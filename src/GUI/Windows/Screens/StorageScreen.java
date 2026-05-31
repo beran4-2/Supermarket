@@ -10,6 +10,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * Represents the storage management screen.
+ * This screen allows the player to view the current state of storage
+ * as well as the amount of items currently pending delivery.
+ */
 public class StorageScreen {
 
     private JPanel storageBackground;
@@ -22,6 +27,14 @@ public class StorageScreen {
     private int monitorWidth;
     private int monitorHeight;
 
+    /**
+     * Constructs the storage screen and initializes all UI components.
+     * Generates a grid layout displaying each product and its current quantity in storage.
+     *
+     * @param customWindow The utility instance handling window dimensions and background rendering.
+     * @param storeManager The manager handling inventory logic, capacities, and pending orders.
+     * @param products     The list of available products in the game.
+     */
     public StorageScreen(CustomWindow customWindow, StoreManager storeManager, ArrayList<Product> products) {
         this.storeManager = storeManager;
         this.products = products;
@@ -80,6 +93,10 @@ public class StorageScreen {
         updateUI();
     }
 
+    /**
+     * Refreshes the user interface to reflect the most up-to-date storage data.
+     * Updates the total capacity, pending deliveries, and the individual quantities of each product.
+     */
     public void updateUI() {
         capacityLabel.setText("current in storage: " + storeManager.getCurrentTotalStorage() + " / " + storeManager.getMaxTotalStorage());
 

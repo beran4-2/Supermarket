@@ -4,13 +4,20 @@ import GUI.Customs.CustomButton;
 import GUI.Customs.CustomWindow;
 
 import javax.swing.*;
-
+/**
+ * The entry point of the graphical user interface.
+ * Displays the main menu where the player can start the game or open settings.
+ */
 public class MainWindow {
     private CustomWindow customWindow;
     private JFrame mainWindow;
     private SettingsWindow settingsWindow;
     private GameWindow gameWindow;
 
+    /**
+     * Initializes the main menu window, sets up the background, and configures
+     * the play and settings buttons.
+     */
     public MainWindow(){
         customWindow = new CustomWindow();
         mainWindow = new JFrame("Main Window");

@@ -2,7 +2,10 @@ package GUI.Customs;
 
 import javax.swing.*;
 import java.awt.*;
-
+/**
+ * A helper class for managing window dimensions and creating custom panels.
+ * It automatically detects the monitor's screen size for fullscreen scaling.
+ */
 public class CustomWindow {
     static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     static int width = (int) screenSize.getWidth();
@@ -15,6 +18,13 @@ public class CustomWindow {
         return height;
     }
 
+    /**
+     * Creates a new JPanel that has a custom image painted as its background.
+     * The background image automatically stretches to fit the exact size of the panel.
+     *
+     * @param backgroundFile The path to the background image file in the resources folder.
+     * @return A JPanel with the specified image as its background.
+     */
     public JPanel paintBackground(String backgroundFile){
         Image img = null;
         try {

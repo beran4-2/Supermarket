@@ -5,13 +5,23 @@ import GUI.Windows.Screens.*;
 import Logic.GameManager;
 
 import javax.swing.*;
-
+/**
+ * The main game window class that shows the UI components and navigation.
+ * It initializes all game screens and sets up the action listeners to switch between storage, shelves, restock, management, and the main game screen.
+ */
 public class GameWindow {
     private CustomWindow customWindow;
     private JFrame gameFrame;
     private GameManager gameManager;
     private MainWindow mainWindow;
 
+
+    /**
+     * Initializes the game window, sets up the game manager, and configures
+     * all navigation listeners between different screens.
+     *
+     * @param mainWindow The main menu window to return to when the back button is pressed.
+     */
     public GameWindow(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
 
@@ -81,21 +91,26 @@ public class GameWindow {
         storageScreen.getBackButton().addActionListener(e -> {
             storageGameBackground.setVisible(false);
             mainGameBackground.setVisible(true);
+            gS.updateLabels(gameManager.getCurrentBalance(), gameManager.getCurrentDay(), gameManager.getCustomers().size());
         });
 
         shelvesScreen.getBackButton().addActionListener(e -> {
             shelvesGameBackground.setVisible(false);
             mainGameBackground.setVisible(true);
+            gS.updateLabels(gameManager.getCurrentBalance(), gameManager.getCurrentDay(), gameManager.getCustomers().size());
+
         });
 
         gS.getRestockButton().addActionListener(e -> {
             mainGameBackground.setVisible(false);
             restockGameBackground.setVisible(true);
+            gS.updateLabels(gameManager.getCurrentBalance(), gameManager.getCurrentDay(), gameManager.getCustomers().size());
         });
 
         restockScreen.getBackButton().addActionListener(e -> {
             restockGameBackground.setVisible(false);
             mainGameBackground.setVisible(true);
+            gS.updateLabels(gameManager.getCurrentBalance(), gameManager.getCurrentDay(), gameManager.getCustomers().size());
         });
 
         restockScreen.getBuyButton().addActionListener(e -> {
@@ -113,6 +128,7 @@ public class GameWindow {
         managementScreen.getBackButton().addActionListener(e -> {
             mainGameBackground.setVisible(true);
             managementGameBackground.setVisible(false);
+            gS.updateLabels(gameManager.getCurrentBalance(), gameManager.getCurrentDay(), gameManager.getCustomers().size());
         });
     }
 

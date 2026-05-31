@@ -5,6 +5,10 @@ import Data.Product;
 import java.util.HashMap;
 import java.util.ArrayList;
 
+/**
+ * Manages the inventory system of the supermarket.
+ * Handles storage, shelf stock, pending orders, and capacity limits.
+ */
 public class StoreManager {
 
     private HashMap<String, Integer> shelves;
@@ -14,6 +18,12 @@ public class StoreManager {
     private int maxTotalShelves;
     private int maxTotalStorage;
 
+    /**
+     * Constructs a new StoreManager and initializes inventory maps with default product values.
+     *
+     * @param availableProducts The list of all products in the game.
+     * @param gameManager The main game manager reference for settings.
+     */
     public StoreManager(ArrayList<Product> availableProducts, GameManager gameManager) {
         shelves = new HashMap<>();
         storage = new HashMap<>();
@@ -29,6 +39,10 @@ public class StoreManager {
         }
     }
 
+    /**
+     * Calculates the total number of items currently on all shelves.
+     * @return The total count of products in shelves.
+     */
     public int getCurrentTotalShelves() {
         int total = 0;
         for (int amount : shelves.values()) {
@@ -37,6 +51,10 @@ public class StoreManager {
         return total;
     }
 
+    /**
+     * Calculates the total number of items currently in the back storage room.
+     * @return The total count of products in storage.
+     */
     public int getCurrentTotalStorage() {
         int total = 0;
         for (Integer amount : storage.values()) {
@@ -45,6 +63,13 @@ public class StoreManager {
         return total;
     }
 
+    /**
+     * Moves a specified amount of product from storage to shelves if capacity allows.
+     *
+     * @param productName The name of the product to move.
+     * @param amount The quantity to move.
+     * @return True if the move was successful, false otherwise.
+     */
     public boolean moveFromStorageToShelves(String productName, int amount) {
         int productInStorage = storage.getOrDefault(productName, 0);
         int productInShelves = shelves.getOrDefault(productName, 0);
@@ -59,6 +84,13 @@ public class StoreManager {
         return false;
     }
 
+    /**
+     * Moves a specified amount of product from shelves back to storage if capacity allows.
+     *
+     * @param productName The name of the product to move.
+     * @param amount The quantity to move.
+     * @return True if the move was successful, false otherwise.
+     */
     public boolean moveFromShelvesToStorage(String productName, int amount) {
         int productInStorage = storage.getOrDefault(productName, 0);
         int productInShelves = shelves.getOrDefault(productName, 0);
@@ -95,7 +127,12 @@ public class StoreManager {
         }
     }
 
-
+    /**
+     * Attempts to sell one unit of a product from the shelves.
+     *
+     * @param productName The product to sell.
+     * @return True if successful, false if product is out of stock.
+     */
     public boolean sellOneFromShelves(String productName) {
         int procuctInShelves = shelves.get(productName);
         if (procuctInShelves > 0) {

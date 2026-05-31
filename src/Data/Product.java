@@ -1,5 +1,7 @@
 package Data;
-
+/**
+ * Represents an item that can be bought, stored, and sold in the supermarket.
+ */
 public class Product {
     private String name;
     private String URL;
@@ -9,6 +11,16 @@ public class Product {
     private int defaultStorage;
     private int defaultOrder;
 
+    /**
+     * Constructs a new Product with the specified details.
+     * * @param name The name of the product.
+     * @param URL The path to the product's image.
+     * @param purchasePrice The cost from the supplier.
+     * @param sellingPrice The price for the customers.
+     * @param defaultShelves The initial amount on shelves.
+     * @param defaultStorage The initial amount in storage.
+     * @param defaultOrder The initial amount on order.
+     */
     public Product(String name, String URL, int purchasePrice, int sellingPrice, int defaultShelves, int defaultStorage, int defaultOrder) {
         this.name = name;
         this.URL = URL;

@@ -9,6 +9,11 @@ import Logic.GameManager;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Represents the management screen of the game.
+ * Here, the player can purchase upgrades for storage and shelves capacities,
+ * view staff statistics, and hire new employees.
+ */
 public class ManagementScreen {
 
     private JPanel managementBackground;
@@ -30,6 +35,13 @@ public class ManagementScreen {
     private int monitorWidth;
     private int monitorHeight;
 
+    /**
+     * Constructs the management screen and initializes all UI elements,
+     * including buttons for upgrades and hiring staff.
+     *
+     * @param customWindow The window helper used for screen dimensions and background painting.
+     * @param gameManager The main logic manager providing access to store data and actions.
+     */
     public ManagementScreen(CustomWindow customWindow, GameManager gameManager) {
         this.gameManager = gameManager;
         this.monitorWidth = CustomWindow.getMonitorWidth();
@@ -39,14 +51,14 @@ public class ManagementScreen {
         managementBackground.setLayout(null);
 
         balanceLabel = new JLabel();
-        balanceLabel.setFont(new Font("Arial", Font.BOLD, (int)(monitorHeight * 0.03)));
+        balanceLabel.setFont(new Font("Arial", Font.BOLD, (int)(monitorHeight * 0.022)));
         balanceLabel.setForeground(new Color(119, 56, 35));
         balanceLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         int balW = (int)(monitorWidth * 0.4);
         int balH = (int)(monitorHeight * 0.05);
         int balX = (monitorWidth / 2) - (balW / 2);
-        int balY = (int)(monitorHeight * 0.24);
+        int balY = (int)(monitorHeight * 0.25);
         balanceLabel.setBounds(balX, balY, balW, balH);
         managementBackground.add(balanceLabel);
 
@@ -277,6 +289,10 @@ public class ManagementScreen {
         updateUI();
     }
 
+    /**
+     * Refreshes all text labels on the screen to show the current game state.
+     * This is called whenever an upgrade is bought or staff is hired to keep the UI accurate.
+     */
     public void updateUI() {
         balanceLabel.setText("Current Balance: $ " + gameManager.getCurrentBalance());
         storageCapLabel.setText("current Storage: " + gameManager.getStoreManager().getMaxTotalStorage());

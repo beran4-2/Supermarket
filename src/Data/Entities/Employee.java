@@ -3,8 +3,11 @@ package Data.Entities;
 import Data.Product;
 import Logic.GameManager;
 
-import java.util.HashMap;
-
+/**
+ * Represents an employee working in the store.
+ * Employees have specific roles (like RESTOCKER or ORDERER)
+ * and a work capacity that limits how many actions they can do in one turn.
+ */
 public class Employee extends Human {
 
     private int instantPrice;
@@ -12,6 +15,15 @@ public class Employee extends Human {
     private int workCapacity;
     private EmployeeRole role;
 
+    /**
+     * Constructs a new Employee instance.
+     * * @param name The display name of the employee.
+     * @param id The unique identifier for this employee.
+     * @param instantPrice The initial cost to hire the employee.
+     * @param salary The amount of money paid to the employee every week.
+     * @param workCapacity The number of items this employee can handle in one turn.
+     * @param role The specific job assigned to this employee.
+     */
     public Employee(String name, int id, int instantPrice, int salary, int workCapacity, EmployeeRole role) {
         super(name, id);
         this.instantPrice = instantPrice;
@@ -20,6 +32,16 @@ public class Employee extends Human {
         this.role = role;
     }
 
+
+    /**
+     *
+     * Updates the employee's daily tasks based on their specific role.
+     * RESTOCKER moves products from storage to the store shelves.
+     * ORDERER checks stock levels and buys missing products if there is enough money.
+     *
+     * @param gameManager The manager providing access to the store's current state.
+     * @return true when the employee successfully finishes their actions for the turn.
+     */
     @Override
     public boolean update(GameManager gameManager) {
         if (role == EmployeeRole.RESTOCKER) {
@@ -84,18 +106,14 @@ public class Employee extends Human {
                     if (currentStorage + totalIncoming >= maxStorage) break;
 
                     String pName = p.getName();
-                    int inStorage = gameManager.getStoreManager().getStorage().get(pName);
-                    int inShelves = gameManager.getStoreManager().getShelves().get(pName);
-                    int inPending = gameManager.getStoreManager().getInOrder().get(pName);
+                    int inPending = gameManager.getStoreManager().getInOrder().getOrDefault(pName, 0);
 
-                    if ((inStorage + inShelves + inPending) < 10) {
-                        int price = p.getPurchasePrice();
-                        if (gameManager.getCurrentBalance() >= price) {
-                            gameManager.setCurrentBalance(gameManager.getCurrentBalance() - price);
-                            gameManager.getStoreManager().getInOrder().put(pName, inPending + 1);
-                            capacity--;
-                            itemOrdered = true;
-                        }
+                    int price = p.getPurchasePrice();
+                    if (gameManager.getCurrentBalance() >= price) {
+                        gameManager.setCurrentBalance(gameManager.getCurrentBalance() - price);
+                        gameManager.getStoreManager().getInOrder().put(pName, inPending + 1);
+                        capacity--;
+                        itemOrdered = true;
                     }
                 }
             }
