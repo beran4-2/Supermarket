@@ -10,10 +10,13 @@ public class GameWindow {
     private CustomWindow customWindow;
     private JFrame gameFrame;
     private GameManager gameManager;
+    private MainWindow mainWindow;
 
-    public GameWindow() {
+    public GameWindow(MainWindow mainWindow) {
+        this.mainWindow = mainWindow;
+
         customWindow = new CustomWindow();
-        gameFrame = new JFrame();
+        gameFrame = new JFrame("Supermarket Simulator - In Game");
 
         gameManager = new GameManager();
         gameManager.gameInitialization();
@@ -66,8 +69,8 @@ public class GameWindow {
         });
 
         gS.getBackButton().addActionListener(e -> {
-            new MainWindow();
-            gameFrame.dispose();
+            gameFrame.setVisible(false);
+            mainWindow.showWindow();
         });
 
         gS.getContinueButton().addActionListener(e -> {
@@ -111,7 +114,9 @@ public class GameWindow {
             mainGameBackground.setVisible(true);
             managementGameBackground.setVisible(false);
         });
+    }
 
+    public void showWindow() {
         gameFrame.setVisible(true);
     }
 }

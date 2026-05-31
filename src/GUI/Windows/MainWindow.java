@@ -9,6 +9,7 @@ public class MainWindow {
     private CustomWindow customWindow;
     private JFrame mainWindow;
     private SettingsWindow settingsWindow;
+    private GameWindow gameWindow;
 
     public MainWindow(){
         customWindow = new CustomWindow();
@@ -35,9 +36,11 @@ public class MainWindow {
         mainBackground.add(playButton);
 
         playButton.addActionListener(e -> {
-            new GameWindow();
-            mainWindow.dispose();
-
+            if (gameWindow == null) {
+                gameWindow = new GameWindow(this);
+            }
+            gameWindow.showWindow();
+            mainWindow.setVisible(false);
         });
 
         int settingsButtonW = (int) (customWindow.getMonitorWidth() * 0.1042);
@@ -53,6 +56,10 @@ public class MainWindow {
         mainBackground.add(settingsButton);
 
         mainWindow.add(mainBackground);
+        mainWindow.setVisible(true);
+    }
+
+    public void showWindow() {
         mainWindow.setVisible(true);
     }
 }
