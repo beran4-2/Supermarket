@@ -10,6 +10,9 @@ public class GameSettings {
     private int currentDay;
     private int lowRandomCustomers;
     private int highRandomCustomers;
+    private int upgrade100StoragePrice;
+    private int upgrade100ShelvesPrice;
+    private double priceMultiplier;
 
     public int getStartMoney() {
         return startMoney;
@@ -83,6 +86,30 @@ public class GameSettings {
         this.highRandomCustomers = highRandomCustomers;
     }
 
+    public int getUpgrade100StoragePrice() {
+        return upgrade100StoragePrice;
+    }
+
+    public void setUpgrade100StoragePrice(int upgrade100StoragePrice) {
+        this.upgrade100StoragePrice = upgrade100StoragePrice;
+    }
+
+    public int getUpgrade100ShelvesPrice() {
+        return upgrade100ShelvesPrice;
+    }
+
+    public void setUpgrade100ShelvesPrice(int upgrade100ShelvesPrice) {
+        this.upgrade100ShelvesPrice = upgrade100ShelvesPrice;
+    }
+
+    public double getPriceMultiplier() {
+        return priceMultiplier;
+    }
+
+    public void setPriceMultiplier(double priceMultiplier) {
+        this.priceMultiplier = priceMultiplier;
+    }
+
     @Override
     public String toString() {
         return "GameSettings{" +
@@ -95,6 +122,9 @@ public class GameSettings {
                 ", currentDay=" + currentDay +
                 ", lowRandomCustomers=" + lowRandomCustomers +
                 ", highRandomCustomers=" + highRandomCustomers +
+                ", upgrade100StoragePrice=" + upgrade100StoragePrice +
+                ", upgrade100ShelvesPrice=" + upgrade100ShelvesPrice +
+                ", priceMultiplier=" + priceMultiplier +
                 '}';
     }
 }

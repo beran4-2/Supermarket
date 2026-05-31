@@ -27,7 +27,7 @@ public class GameManager {
     public void gameInitialization(){
         data = GameLoad.loadDataFromResource("/gameData.json");
         employees = data.getEmployees();
-        hiredEmployees = employees;
+        hiredEmployees = new ArrayList<>();
         products = data.getProducts();
         currentBalance = data.getSettings().getStartMoney();
         currentDay = data.getSettings().getCurrentDay();

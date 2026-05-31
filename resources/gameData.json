@@ -8,7 +8,10 @@
     "chanceIncrease": 5,
     "currentDay":0,
     "lowRandomCustomers": 10,
-    "highRandomCustomers": 15
+    "highRandomCustomers": 15,
+    "upgrade100StoragePrice": 500,
+    "upgrade100ShelvesPrice": 600,
+    "priceMultiplier": 1.5
   },
   "products": [
     {
