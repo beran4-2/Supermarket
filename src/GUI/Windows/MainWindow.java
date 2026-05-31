@@ -2,10 +2,7 @@
 
     import GUI.Customs.CustomButton;
     import GUI.Customs.CustomWindow;
-    import GUI.Windows.Screens.GameScreen;
-    import GUI.Windows.Screens.RestockScreen;
-    import GUI.Windows.Screens.ShelvesScreen;
-    import GUI.Windows.Screens.StorageScreen;
+    import GUI.Windows.Screens.*;
     import Logic.GameManager;
 
     import javax.swing.*;
@@ -55,6 +52,11 @@
             JPanel restockGameBackground = restockScreen.getRestockBackground();
             restockGameBackground.setVisible(false);
 
+            ManagementScreen managementScreen = new ManagementScreen(customWindow, gameManager);
+            JPanel managementGameBackground = managementScreen.getManagementBackground();
+            managementGameBackground.setVisible(false);
+            mainWindw.add(managementGameBackground);
+
             mainWindw.add(mainBackground);
             mainWindw.add(mainGameBackground);
             mainWindw.add(storageGameBackground);
@@ -102,6 +104,14 @@
                 if (success) {
                     restockScreen.resetCart();
                 }
+            });
+            gS.getManagementButton().addActionListener(e -> {
+                mainGameBackground.setVisible(false);
+                managementGameBackground.setVisible(true);
+            });
+            managementScreen.getBackButton().addActionListener(e -> {
+                mainGameBackground.setVisible(true);
+                managementGameBackground.setVisible(false);
             });
 
 

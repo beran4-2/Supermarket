@@ -110,4 +110,12 @@ public class StoreManager {
     public HashMap<String, Integer> getInOrder() { return inOrder; }
     public int getMaxTotalShelves() { return maxTotalShelves; }
     public int getMaxTotalStorage() { return maxTotalStorage; }
+
+    public void setMaxTotalShelves(int maxTotalShelves) {
+        this.maxTotalShelves = maxTotalShelves;
+    }
+
+    public void setMaxTotalStorage(int maxTotalStorage) {
+        this.maxTotalStorage = maxTotalStorage;
+    }
 }

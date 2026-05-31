@@ -1,6 +1,6 @@
 {
   "settings": {
-    "startMoney": 50000,
+    "startMoney": 5000000,
     "numberOfCustomers": 150,
     "basePercentProd": 10,
     "MaxTotalShelves": 2000,
@@ -11,7 +11,7 @@
     "highRandomCustomers": 15,
     "upgrade100StoragePrice": 500,
     "upgrade100ShelvesPrice": 600,
-    "priceMultiplier": 1.5
+    "priceMultiplier": 1.1
   },
   "products": [
     {

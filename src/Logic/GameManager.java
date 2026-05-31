@@ -9,15 +9,12 @@ import java.util.ArrayList;
 
 public class GameManager {
 
-
     private GameLoad data;
     private StoreManager storeManager;
-
 
     private ArrayList<Customer> customers;
     private ArrayList<Employee> employees;
     private ArrayList<Employee> hiredEmployees;
-
 
     private int currentBalance;
     private int currentDay;
@@ -95,19 +92,62 @@ public class GameManager {
         return false;
     }
 
-
     public void generateRandomCustomers(int lowRandom, int highRandom) {
         java.util.Random random = new java.util.Random();
         int count = random.nextInt((highRandom - lowRandom) + 1) + lowRandom;
         generateNewCustomers(count);
     }
 
-//    public void hireEmployee(Employee employee) {
-//        if (currentBalance >= employee.getInstantPrice()) {
-//            currentBalance -= employee.getInstantPrice();
-//            hiredEmployees.add(employee);
-//        }
-//    }
+    public boolean hireEmployee(Employee template) {
+        if (currentBalance >= template.getInstantPrice()) {
+            currentBalance -= template.getInstantPrice();
+            Employee newEmployee = new Employee(
+                    template.getName(),
+                    (int)(Math.random() * 10000),
+                    template.getInstantPrice(),
+                    template.getSalary(),
+                    template.getWorkCapacity(),
+                    template.getRole()
+            );
+            hiredEmployees.add(newEmployee);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean upgradeStorage() {
+        int currentPrice = data.getSettings().getUpgrade100StoragePrice();
+        if (currentBalance >= currentPrice) {
+            currentBalance -= currentPrice;
+
+            int newMax = storeManager.getMaxTotalStorage() + 100;
+            storeManager.setMaxTotalStorage(newMax);
+            data.getSettings().setMaxTotalStorage(newMax);
+
+            int nextPrice = (int) (currentPrice * data.getSettings().getPriceMultiplier());
+            data.getSettings().setUpgrade100StoragePrice(nextPrice);
+
+            return true;
+        }
+        return false;
+    }
+
+    public boolean upgradeShelves() {
+        int currentPrice = data.getSettings().getUpgrade100ShelvesPrice();
+        if (currentBalance >= currentPrice) {
+            currentBalance -= currentPrice;
+
+            int newMax = storeManager.getMaxTotalShelves() + 100;
+            storeManager.setMaxTotalShelves(newMax);
+            data.getSettings().setMaxTotalShelves(newMax);
+
+            int nextPrice = (int) (currentPrice * data.getSettings().getPriceMultiplier());
+            data.getSettings().setUpgrade100ShelvesPrice(nextPrice);
+
+            return true;
+        }
+        return false;
+    }
 
     public ArrayList<Employee> getHiredEmployees() {
         return hiredEmployees;

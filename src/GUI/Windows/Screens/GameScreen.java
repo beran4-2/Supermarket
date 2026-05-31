@@ -14,6 +14,7 @@ public class GameScreen {
     private JButton backButton;
     private JButton continueButton;
     private JButton restockButton;
+    private JButton managementButton;
 
     private JLabel balanceLabel;
     private JLabel dayLabel;
@@ -71,6 +72,15 @@ public class GameScreen {
         CustomButton.buttonImage(continueButton, "/pictures/MainGameBackground/MainGameContinueButton.png", continueButtonW, continueButtonH);
         continueButton.setLocation(continueButtonX, continueButtonY);
         mainGameBackground.add(continueButton);
+
+        int managmentButtonW = (int) (customWindow.getMonitorWidth() * 0.25);
+        int managmentButtonH = (int) (customWindow.getMonitorHeight() * 0.22);
+        int managmentButtonX = (int) (customWindow.getMonitorWidth() * 0.4);
+        int managmentButtonY = (int) (customWindow.getMonitorHeight() * 0.79);
+        managementButton = new CustomButton();
+        CustomButton.buttonImage(managementButton, "/pictures/ManagmentButton.png", managmentButtonW, managmentButtonH);
+        managementButton.setLocation(managmentButtonX, managmentButtonY);
+        mainGameBackground.add(managementButton);
 
         int infoTabW = (int)(monitorWidth * 0.25);
         int infoTabH = (int)(monitorHeight * 0.30);
@@ -130,5 +140,9 @@ public class GameScreen {
 
     public JButton getRestockButton() {
         return restockButton;
+    }
+
+    public JButton getManagementButton() {
+        return managementButton;
     }
 }
